@@ -29,7 +29,7 @@ url: https://jatho.github.io # the base hostname & protocol for your site, e.g. 
 twitter_username: jatho
 github_username:  jatho
 
-source: src
+source: docs
 
 # Build settings
 theme: minima
