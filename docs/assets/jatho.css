@@ -9,6 +9,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.nav-link.active {
+    pointer-events: none;
+} 
+
 .breadcrumb-container {
     position: sticky;
     top: 0;
