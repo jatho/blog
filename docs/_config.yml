@@ -37,6 +37,9 @@ permalink: /:year-:month-:title
 
 show_excerpts: true
 
+compress_html:
+  clippings: all
+  comments: all
 
 # Build settings
 theme: minima
