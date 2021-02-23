@@ -8,6 +8,7 @@
   <link rel="preload" href="{{ "/assets/bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js" | relative_url }}" as="script">
   <link rel="stylesheet" href="{{ "/assets/jatho.css" | relative_url }}">
   {%- feed_meta -%}
+  <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}">
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}

@@ -1,22 +1,48 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="{{ "/" | relative_url }}" title="{{ site.title | escape }}">
+      <i class="fas fa-ticket-alt fa-2x"></i>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav align-self-end">
+        <li class="nav-item">
+          <a class="nav-link {% if page.url == "/" %}active{% endif %}" title="Home" href="{{ "/" | relative_url }}">Home</a>
+        </li>
         {%- assign default_paths = site.pages | map: "path" -%}
-        {%- assign page_paths = site.header_pages | default: default_paths -%}  
+        {%- assign page_paths = site.header_pages | default: default_paths -%}
         {%- for path in page_paths -%}
-          {%- assign my_page = site.pages | where: "path", path | first -%}
-          {%- if my_page.title -%}
-            <li class="nav-item">
-              <a class="nav-link" title="{{ my_page.title }}" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-            </li>
-          {%- endif -%}
+        {%- assign my_page = site.pages | where: "path", path | first -%}
+        {%- if my_page.title -%}
+        <li class="nav-item">
+          <a class="nav-link {% if my_page.url == page.url %}active{% endif %}"" title="{{ my_page.title }}" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+        </li>
+        {%- endif -%}
         {%- endfor -%}
       </ul>
     </div>
   </div>
 </nav>
+{%- if page.breadcrumbs -%}
+<nav class="breadcrumb-container shadow-sm bg-white" aria-label="breadcrumb">
+  <ol class="breadcrumb container" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ "/" | relative_url }}" title="Home" itemprop="item">
+        <i class="fas fa-home"></i>
+        <meta itemprop="name" content="{{ site.title }}">
+      </a>
+      <meta itemprop="position" content="1">
+    </li>
+    {% for item in page.breadcrumbs %}
+    <li class="breadcrumb-item {% if forloop.last == true %}active{% endif %}" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a {% if forloop.last==true %}aria-current="page" {% endif %} href="{{ item.link | default: page.url | relative_url }}" title="{{ item.title | default: page.title }}" itemprop="item">
+        <span itemprop="name">{{ item.name | default: page.title }}</span>
+      </a>
+      <meta itemprop="position" content="{{ forloop.index | plus: 1 }}">
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+{%- endif -%}

@@ -4,26 +4,6 @@
   <body>
     {%- include header.html -%}
     <main class="container" aria-label="Content">
-      {%- if page.breadcrumbs or page.layout == "post" -%}
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-              <a href="{{ "/" | relative_url }}" title="Home" itemprop="item">
-                <span itemprop="name">Home</span>
-                <meta itemprop="position" content="1">
-              </a>
-            </li>
-            {% for item in page.breadcrumbs %}
-                <li class="breadcrumb-item {% if forloop.last == true %}active{% endif %}" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                  <a {% if forloop.last == true %}aria-current="page"{% endif %} href="{{ item.link | default: page.url | relative_url }}" title="{{ item.title | default: page.title }}" itemprop="item">
-                    <span itemprop="name">{{ item.name | default: page.title }}</span>
-                  </a>
-                  <meta itemprop="position" content="{{ forloop.index | plus: 1 }}">
-                </li>
-            {% endfor %}
-          </ol>
-        </nav>
-      {%- endif -%}
       <div class="col">
         {{ content }}
       </div>
