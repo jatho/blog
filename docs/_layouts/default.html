@@ -3,12 +3,20 @@
   {%- include head.html -%}
   <body>
     {%- include header.html -%}
-    <main class="container" aria-label="Content">
+    <main class="container-lg" aria-label="Content">
       <div class="col">
         {{ content }}
       </div>
     </main>
-
+    {%- include footer.html -%}
     <script src="{{ "/assets/bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js" | relative_url }}"></script>
+    <script>
+      const links = document.querySelectorAll('a.nav-link.active,li.breadcrumb-item.active a');
+      links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+        })
+      })
+    </script>
   </body>
 </html>

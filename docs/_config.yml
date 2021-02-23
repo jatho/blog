@@ -28,16 +28,36 @@ url: "https://git.arenaticket.de" # the base hostname & protocol for your site, 
 twitter_username: jatho
 github_username:  jatho
 
+sass:
+  sass_dir: _sass
+  style: compressed
+
 timezone: Europe/Berlin
 permalink: /:year-:month-:title
 
 show_excerpts: true
+
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts" # previously `post` in Jekyll 2.2.
+    values:
+      layout: "post"
+  -
+    scope:
+      path: "seiten" # an empty string here means all files in the project
+    values:
+      layout: "page"
+      permalink: "/:basename"
+      output: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
